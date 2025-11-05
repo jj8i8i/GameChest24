@@ -1,7 +1,12 @@
+/* *** เพิ่มส่วนนี้ *** */
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&display=swap');
+
 /* Basic Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a2e;
+    /* เปลี่ยนฟอนต์หลัก */
+    font-family: 'Bungee', cursive;
+    /* เปลี่ยนสีพื้นหลังให้มีมิติ */
+    background: radial-gradient(circle, #3a3a6e, #1a1a2e);
     color: #e0e0e0;
     display: flex;
     justify-content: center;
@@ -14,12 +19,13 @@ body {
     background-color: #2a2a4e;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    width: 400px;
+    /* เพิ่มขอบและเงาให้ดูเป็น UI เกม */
+    border: 3px solid #f9c74f;
+    box-shadow: 0 0 30px rgba(249, 199, 79, 0.4);
+    width: 450px;
     text-align: center;
 }
 
-/* ซ่อน/แสดง หน้า */
 .hidden {
     display: none;
 }
@@ -29,39 +35,58 @@ input[type="text"],
 input[type="password"],
 input[type="number"] {
     width: 90%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
-    border: none;
+    border: 2px solid #9090be;
     border-radius: 5px;
     background-color: #1a1a2e;
     color: #e0e0e0;
+    font-family: 'Bungee', cursive;
+    font-size: 1rem;
 }
 
 button {
-    background-color: #f9c74f;
-    color: #1a1a2e;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 8px;
     cursor: pointer;
+    font-family: 'Bungee', cursive;
     font-weight: bold;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 button:hover {
-    background-color: #f8b400;
+    transform: scale(1.05);
+}
+button:active {
+    transform: scale(0.98);
 }
 
 button:disabled {
     background-color: #555;
     cursor: not-allowed;
+    transform: scale(1);
 }
 
-.error-message {
-    color: #f94144;
+/* *** เปลี่ยนสีปุ่ม *** */
+#login-button {
+    background-color: #43aa8b; /* เขียว */
+    color: #fff;
+}
+#login-button:hover {
+    background-color: #3b9a7c;
+}
+
+#logout-button {
+    background-color: #f94144; /* แดง */
+    color: #fff;
+    padding: 8px 12px;
     font-size: 0.9rem;
-    height: 1.2em;
+}
+#logout-button:hover {
+    background-color: #e03033;
 }
 
 /* Game Styles */
@@ -70,11 +95,23 @@ button:disabled {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
 
 #gold-display {
     font-weight: bold;
     color: #f9c74f;
+    background-color: #1a1a2e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* *** เพิ่มฟอนต์หัวเกม *** */
+.game-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #f9c74f;
+    font-size: 1.8rem;
+    text-shadow: 3px 3px 0px #f94144;
 }
 
 .chest-area {
@@ -87,29 +124,64 @@ button:disabled {
     width: 100px;
     height: 100px;
     background-color: #4a4a7c;
-    border: 2px solid #9090be;
+    border: 3px solid #9090be;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
-    transition: transform 0.1s ease;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* สไตล์ไอเทม (ตัวอย่าง) */
+/* *** เพิ่มอนิเมชั่น "หมุน" *** */
+.spinning {
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* สไตล์ไอเทม */
 .item-ruby { color: #f94144; } /* 💎 */
 .item-emerald { color: #43aa8b; } /* 🟢 */
 .item-gold { color: #f9c74f; } /* 💰 */
 .item-junk { color: #577590; } /* ⚙️ */
 
-
 #result-message {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     height: 2em;
+    margin-top: 1rem;
 }
 
-.controls {
+/* *** เพิ่มสีข้อความผลลัพธ์ *** */
+.win-message {
+    color: #43aa8b; /* เขียว */
+}
+.lose-message {
+    color: #f94144; /* แดง */
+}
+
+
+#open-button {
+    background-color: #f9c74f;
+    color: #1a1a2e;
+    width: 80%;
     margin-top: 1rem;
+    /* *** เพิ่มอนิเมชั่นให้ปุ่มหลัก *** */
+    animation: pulse 1.5s infinite;
+}
+#open-button:hover {
+    background-color: #f8b400;
+}
+
+/* *** เพิ่มอนิเมชั่น "กระพริบ" *** */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
