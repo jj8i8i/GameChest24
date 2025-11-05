@@ -1,11 +1,14 @@
-/* *** เพิ่มส่วนนี้ *** */
-@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
 
-/* Basic Styles */
+/* --- *** ปรับปรุงส่วนนี้ *** --- */
+/*
+  เราจะใช้ฟอนต์ Roboto สำหรับข้อความทั่วไป
+  Bungee สำหรับปุ่มและ UI
+  Press Start 2P สำหรับหัวข้อเกมหลัก
+*/
 body {
-    /* เปลี่ยนฟอนต์หลัก */
-    font-family: 'Bungee', cursive;
-    /* เปลี่ยนสีพื้นหลังให้มีมิติ */
+    /* เปลี่ยนฟอนต์หลักเป็น Roboto (อ่านง่าย) */
+    font-family: 'Roboto', sans-serif; 
     background: radial-gradient(circle, #3a3a6e, #1a1a2e);
     color: #e0e0e0;
     display: flex;
@@ -13,18 +16,28 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    /* เพิ่ม font-weight ปกติ */
+    font-weight: 400; 
 }
+/* --- จบส่วนปรับปรุง --- */
 
 .container {
     background-color: #2a2a4e;
     padding: 2rem;
     border-radius: 10px;
-    /* เพิ่มขอบและเงาให้ดูเป็น UI เกม */
     border: 3px solid #f9c74f;
     box-shadow: 0 0 30px rgba(249, 199, 79, 0.4);
     width: 450px;
     text-align: center;
 }
+
+/* --- *** ปรับปรุงส่วนนี้ *** --- */
+/* ใช้ Bungee เฉพาะส่วนที่อยากให้หนาและเป็นเกม */
+h2, .controls label {
+    font-family: 'Bungee', cursive;
+}
+/* --- จบส่วนปรับปรุง --- */
+
 
 .hidden {
     display: none;
@@ -41,8 +54,11 @@ input[type="number"] {
     border-radius: 5px;
     background-color: #1a1a2e;
     color: #e0e0e0;
-    font-family: 'Bungee', cursive;
+    /* --- *** ปรับปรุงส่วนนี้ *** --- */
+    /* เปลี่ยนฟอนต์ช่องกรอกเป็น Roboto */
+    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
+    font-weight: 700; /* ทำให้ตัวหนังสือในช่องกรอกชัดขึ้นเล็กน้อย */
 }
 
 button {
@@ -50,8 +66,10 @@ button {
     padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Bungee', cursive;
-    font-weight: bold;
+    /* --- *** ปรับปรุงส่วนนี้ *** --- */
+    /* ฟอนต์ปุ่มยังใช้ Bungee */
+    font-family: 'Bungee', cursive; 
+    font-weight: bold; /* Bungee มีแต่ bold อยู่แล้ว */
     font-size: 1.1rem;
     transition: all 0.2s ease;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -70,9 +88,8 @@ button:disabled {
     transform: scale(1);
 }
 
-/* *** เปลี่ยนสีปุ่ม *** */
 #login-button {
-    background-color: #43aa8b; /* เขียว */
+    background-color: #43aa8b;
     color: #fff;
 }
 #login-button:hover {
@@ -80,10 +97,11 @@ button:disabled {
 }
 
 #logout-button {
-    background-color: #f94144; /* แดง */
+    background-color: #f94144;
     color: #fff;
     padding: 8px 12px;
-    font-size: 0.9rem;
+    /* --- *** ปรับปรุงส่วนนี้ *** --- */
+    font-size: 0.9rem; /* ใช้ขนาดของ Bungee */
 }
 #logout-button:hover {
     background-color: #e03033;
@@ -95,18 +113,20 @@ button:disabled {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    font-size: 1.1rem;
+    /* --- *** ปรับปรุงส่วนนี้ *** --- */
+    font-size: 1rem; /* ปรับขนาดฟอนต์ Roboto ให้พอดี */
+    font-weight: 700; /* ทำให้ข้อความต้อนรับหนาเล็กน้อย */
 }
 
 #gold-display {
-    font-weight: bold;
+    font-weight: 700; /* ใช้ 700 (bold) ของ Roboto */
     color: #f9c74f;
     background-color: #1a1a2e;
     padding: 5px 10px;
     border-radius: 5px;
 }
 
-/* *** เพิ่มฟอนต์หัวเกม *** */
+/* ใช้ฟอนต์ Press Start 2P ที่หัวข้อเกม */
 .game-title {
     font-family: 'Press Start 2P', cursive;
     color: #f9c74f;
@@ -120,6 +140,7 @@ button:disabled {
     margin: 2rem 0;
 }
 
+/* ช่องแสดงผลลัพธ์ยังต้องตัวหนาและใหญ่ */
 .chest {
     width: 100px;
     height: 100px;
@@ -135,7 +156,6 @@ button:disabled {
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* *** เพิ่มอนิเมชั่น "หมุน" *** */
 .spinning {
     animation: spin 0.5s linear infinite;
 }
@@ -145,41 +165,37 @@ button:disabled {
     to { transform: rotateY(360deg); }
 }
 
-/* สไตล์ไอเทม */
-.item-ruby { color: #f94144; } /* 💎 */
-.item-emerald { color: #43aa8b; } /* 🟢 */
-.item-gold { color: #f9c74f; } /* 💰 */
-.item-junk { color: #577590; } /* ⚙️ */
+.item-ruby { color: #f94144; }
+.item-emerald { color: #43aa8b; }
+.item-gold { color: #f9c74f; }
+.item-junk { color: #577590; }
 
 #result-message {
-    font-size: 1.2rem;
-    font-weight: bold;
+    /* --- *** ปรับปรุงส่วนนี้ *** --- */
+    font-size: 1.1rem; /* ปรับขนาดฟอนต์ Roboto */
+    font-weight: 700; /* ใช้ bold ของ Roboto */
     height: 2em;
     margin-top: 1rem;
 }
 
-/* *** เพิ่มสีข้อความผลลัพธ์ *** */
 .win-message {
-    color: #43aa8b; /* เขียว */
+    color: #43aa8b;
 }
 .lose-message {
-    color: #f94144; /* แดง */
+    color: #f94144;
 }
-
 
 #open-button {
     background-color: #f9c74f;
     color: #1a1a2e;
     width: 80%;
     margin-top: 1rem;
-    /* *** เพิ่มอนิเมชั่นให้ปุ่มหลัก *** */
     animation: pulse 1.5s infinite;
 }
 #open-button:hover {
     background-color: #f8b400;
 }
 
-/* *** เพิ่มอนิเมชั่น "กระพริบ" *** */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
