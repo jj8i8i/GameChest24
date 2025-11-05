@@ -22,30 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentUser = null;
 
-    // --- *** นี่คือส่วนที่แก้ไขแล้ว (อัปเดตลิงก์ Postimg) *** ---
+    // --- *** นี่คือส่วนที่แก้ไขแล้ว (อัปเดตลิงก์ GitHub Raw) *** ---
     const ITEMS = [
         // Tier 1: Common (Junk) - (อันดับ 3)
         { 
             name: 'ตัวละคร Common', 
-            imageUrl: 'https://i.postimg.cc/zG9NcHTm/1762349812302.jpg', // <-- รูปที่ 3
+            imageUrl: 'https://raw.githubusercontent.com/jj8i8i/GameChest24/main/1762349812302.jpg', // <-- รูปที่ 3
             weight: 20 
         },
         // Tier 2: Uncommon - (อันดับ 3)
         { 
             name: 'ตัวละคร Uncommon', 
-            imageUrl: 'https://i.postimg.cc/zG9NcHTm/1762349812302.jpg', // <-- รูปที่ 3
+            imageUrl: 'https://raw.githubusercontent.com/jj8i8i/GameChest24/main/1762349812302.jpg', // <-- รูปที่ 3
             weight: 4 
         },
         // Tier 3: Rare - (อันดับ 2)
         { 
             name: 'ตัวละคร Rare', 
-            imageUrl: 'https://i.postimg.cc/XYhN6z66/1762349639110.jpg', // <-- รูปที่ 2
+            imageUrl: 'https://raw.githubusercontent.com/jj8i8i/GameChest24/main/1762349639110.jpg', // <-- รูปที่ 2
             weight: 2 
         },
         // Tier 4: Legendary - (อันดับ 1)
         { 
             name: 'ตัวละคร Legendary', 
-            imageUrl: 'https://i.postimg.cc/QCrHGn7P/1762349786753.jpg', // <-- รูปที่ 1
+            imageUrl: 'https://raw.githubusercontent.com/jj8i8i/GameChest24/main/1762349786753.jpg', // <-- รูปที่ 1
             weight: 1 
         }
     ];
