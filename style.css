@@ -1,0 +1,115 @@
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #2a2a4e;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    text-align: center;
+}
+
+/* ซ่อน/แสดง หน้า */
+.hidden {
+    display: none;
+}
+
+/* Form Styles */
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
+
+button {
+    background-color: #f9c74f;
+    color: #1a1a2e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #f8b400;
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #f94144;
+    font-size: 0.9rem;
+    height: 1.2em;
+}
+
+/* Game Styles */
+.user-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#gold-display {
+    font-weight: bold;
+    color: #f9c74f;
+}
+
+.chest-area {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+}
+
+.chest {
+    width: 100px;
+    height: 100px;
+    background-color: #4a4a7c;
+    border: 2px solid #9090be;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    transition: transform 0.1s ease;
+}
+
+/* สไตล์ไอเทม (ตัวอย่าง) */
+.item-ruby { color: #f94144; } /* 💎 */
+.item-emerald { color: #43aa8b; } /* 🟢 */
+.item-gold { color: #f9c74f; } /* 💰 */
+.item-junk { color: #577590; } /* ⚙️ */
+
+
+#result-message {
+    font-size: 1.1rem;
+    font-weight: bold;
+    height: 2em;
+}
+
+.controls {
+    margin-top: 1rem;
+}
