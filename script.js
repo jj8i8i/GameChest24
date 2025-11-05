@@ -1,48 +1,46 @@
-// รอให้ HTML โหลดเสร็จก่อน
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. ฐานข้อมูลและสถานะเกม ---
-
-    // ฐานข้อมูล Account (รหัสผ่านควรถูก hash ในโลกจริง)
     const ACCOUNTS_DB = {
         "test1": { password: "test1" },
         "test2": { password: "test2" },
         "test3": { password: "test3" },
-        "test4": { password: "test4" }, // เพิ่ม 2 account ตามที่ขอ
+        "test4": { password: "test4" },
         "test5": { password: "test5" }
     };
-
-    // ฐานข้อมูลเงินในเกม (แยกเก็บเพื่อให้อัปเดตได้)
+    
     const userWallet = {
-        "test1": 100000000, // 100M
+        "test1": 100000000,
         "test2": 100000000,
         "test3": 100000000,
         "test4": 100000000,
         "test5": 100000000
     };
 
-    // สถานะของแอป
     let currentUser = null;
 
-    // ไอเทมที่สุ่มได้
+    // --- *** ปรับปรุงส่วนนี้ (ความยาก) *** ---
+    // ไอเทมที่สุ่มได้ (ปรับ Weight)
     const ITEMS = [
-        { name: 'Junk', symbol: '⚙️', class: 'item-junk', weight: 10 },
-        { name: 'Gold', symbol: '💰', class: 'item-gold', weight: 5 },
-        { name: 'Emerald', symbol: '🟢', class: 'item-emerald', weight: 3 },
-        { name: 'Ruby', symbol: '💎', class: 'item-ruby', weight: 1 } // หายากสุด
+        // เพิ่มน้ำหนัก Junk ให้ออกง่ายขึ้น (จาก 10 เป็น 20)
+        { name: 'Junk', symbol: '⚙️', class: 'item-junk', weight: 20 },
+        // ลดน้ำหนัก Gold (จาก 5 เป็น 4)
+        { name: 'Gold', symbol: '💰', class: 'item-gold', weight: 4 },
+        // ลดน้ำหนัก Emerald (จาก 3 เป็น 2)
+        { name: 'Emerald', symbol: '🟢', class: 'item-emerald', weight: 2 },
+        // Ruby หายากเท่าเดิม
+        { name: 'Ruby', symbol: '💎', class: 'item-ruby', weight: 1 } 
     ];
+    // --- จบส่วนปรับปรุง ---
 
-    // --- 2. DOM Elements (ตัวแปรเชื่อม HTML) ---
+
+    // --- 2. DOM Elements (เหมือนเดิม) ---
     const loginContainer = document.getElementById('login-container');
     const gameContainer = document.getElementById('game-container');
-    
-    // Login
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const loginButton = document.getElementById('login-button');
     const loginError = document.getElementById('login-error');
-
-    // Game
     const welcomeMessage = document.getElementById('welcome-message');
     const goldDisplay = document.getElementById('gold-display');
     const logoutButton = document.getElementById('logout-button');
@@ -54,60 +52,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultMessage = document.getElementById('result-message');
 
 
-    // --- 3. ฟังก์ชันหลัก ---
+    // --- 3. ฟังก์ชันหลัก (มีการเปลี่ยนแปลง) ---
 
-    /**
-     * อัปเดตยอดเงินที่แสดงบน UI
-     */
     function updateGoldDisplay() {
         if (currentUser) {
             goldDisplay.textContent = `ทอง: ${userWallet[currentUser].toLocaleString()}`;
         }
     }
 
-    /**
-     * จัดการการ Login
-     */
     function handleLogin() {
+        // (ฟังก์ชันนี้เหมือนเดิม)
         const username = usernameInput.value;
         const password = passwordInput.value;
 
-        // ตรวจสอบว่ามี user นี้ใน DB และรหัสผ่านตรงกันหรือไม่
         if (ACCOUNTS_DB[username] && ACCOUNTS_DB[username].password === password) {
-            // Login สำเร็จ
             currentUser = username;
             loginError.textContent = '';
             usernameInput.value = '';
             passwordInput.value = '';
-
-            // แสดงหน้าเกม
             loginContainer.classList.add('hidden');
             gameContainer.classList.remove('hidden');
-
-            // ตั้งค่าหน้าเกม
             welcomeMessage.textContent = `ยินดีต้อนรับ, ${currentUser}`;
             updateGoldDisplay();
-
         } else {
-            // Login ไม่สำเร็จ
             loginError.textContent = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
         }
     }
 
-    /**
-     * จัดการการ Logout
-     */
     function handleLogout() {
+        // (ฟังก์ชันนี้เหมือนเดิม)
         currentUser = null;
         loginContainer.classList.remove('hidden');
         gameContainer.classList.add('hidden');
     }
 
-    /**
-     * สุ่มไอเทมโดยใช้น้ำหนัก (Weight)
-     */
     function getRandomItem() {
-        // สร้าง mWeighted List
+        // (ฟังก์ชันนี้เหมือนเดิม แต่ผลลัพธ์จะเปลี่ยนไปตาม Weight ที่เราแก้)
         const weightedList = [];
         ITEMS.forEach(item => {
             for (let i = 0; i < item.weight; i++) {
@@ -115,106 +95,107 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // สุ่มจาก List ที่มีน้ำหนักแล้ว
         const randomIndex = Math.floor(Math.random() * weightedList.length);
         return weightedList[randomIndex];
     }
 
-    /**
-     * จัดการการเปิดหีบ (การ "หมุน")
-     */
     function handleOpenChest() {
         const betAmount = parseInt(betInput.value, 10);
 
-        // ตรวจสอบเงื่อนไข
         if (isNaN(betAmount) || betAmount <= 0) {
             resultMessage.textContent = 'กรุณาใส่ค่ากุญแจที่ถูกต้อง';
             return;
         }
-
         if (userWallet[currentUser] < betAmount) {
             resultMessage.textContent = 'คุณมีทองไม่เพียงพอ!';
             return;
         }
 
-        // ล็อกปุ่มกันกดซ้ำ
         openButton.disabled = true;
         resultMessage.textContent = 'กำลังเปิดหีบ...';
+        resultMessage.className = ''; // ล้างสีข้อความ
 
-        // 1. หักเงิน
         userWallet[currentUser] -= betAmount;
         updateGoldDisplay();
 
-        // 2. สุ่มผลลัพธ์
         const results = [getRandomItem(), getRandomItem(), getRandomItem()];
-        
-        // อนิเมชั่นเล็กน้อย (จำลองการหมุน)
         const chests = [chest1, chest2, chest3];
+        
+        // --- *** เพิ่มส่วนนี้ (อนิเมชั่น) *** ---
+        // เพิ่ม class 'spinning'
         chests.forEach(chest => {
             chest.textContent = '❓';
             chest.className = 'chest'; // Reset class
+            chest.classList.add('spinning'); // เริ่มหมุน
         });
+        // --- จบส่วนเพิ่ม ---
 
         setTimeout(() => {
-            // 3. แสดงผลลัพธ์
-            results.forEach((item, index) => {
-                chests[index].textContent = item.symbol;
-                chests[index].classList.add(item.class);
+            // --- *** เพิ่มส่วนนี้ (อนิเมชั่น) *** ---
+            // ลบ class 'spinning'
+            chests.forEach((chest, index) => {
+                chest.classList.remove('spinning'); // หยุดหมุน
+                // --- จบส่วนเพิ่ม ---
+                
+                // แสดงผลลัพธ์ (เหมือนเดิม)
+                const item = results[index];
+                chest.textContent = item.symbol;
+                chest.classList.add(item.class);
             });
 
-            // 4. ตรวจสอบรางวัล
             checkWinnings(results, betAmount);
-
-            // 5. ปลดล็อกปุ่ม
             openButton.disabled = false;
-        }, 1000); // หน่วงเวลา 1 วินาที
+        }, 1000); // หน่วงเวลา 1 วินาที (เวลาหมุน)
     }
 
+
+    // --- *** ปรับปรุงส่วนนี้ (ลดเงินรางวัล) *** ---
     /**
-     * ตรวจสอบรางวัลและจ่ายโบนัส
+     * ตรวจสอบรางวัลและจ่ายโบนัส (ลดเงินรางวัล)
      */
     function checkWinnings(results, betAmount) {
         const [r1, r2, r3] = results;
 
         let bonus = 0;
         let message = '';
+        resultMessage.className = ''; // ล้าง class
 
-        // 3-of-a-kind (เหมือนกัน 3 ช่อง)
+        // 3-of-a-kind (เหมือนกัน 3 ช่อง) - ลดรางวัลลง
         if (r1.name === r2.name && r2.name === r3.name) {
-            if (r1.name === 'Ruby') bonus = betAmount * 100; // รางวัลใหญ่สุด
-            else if (r1.name === 'Emerald') bonus = betAmount * 50;
-            else if (r1.name === 'Gold') bonus = betAmount * 20;
-            else bonus = betAmount * 5; // Junk 3 อัน
+            if (r1.name === 'Ruby') bonus = betAmount * 50;  // (จาก * 100)
+            else if (r1.name === 'Emerald') bonus = betAmount * 25; // (จาก * 50)
+            else if (r1.name === 'Gold') bonus = betAmount * 10;    // (จาก * 20)
+            else bonus = betAmount * 2;     // (Junk, จาก * 5)
 
             message = `แจ็คพอต! ได้ ${r1.name} 3 อัน! +${bonus.toLocaleString()} ทอง!`;
+            resultMessage.classList.add('win-message');
         }
-        // 2-of-a-kind (เหมือนกัน 2 ช่อง)
+        // 2-of-a-kind (เหมือนกัน 2 ช่อง) - ลดรางวัลลง
         else if (r1.name === r2.name || r2.name === r3.name || r1.name === r3.name) {
-            bonus = betAmount * 2; // ได้ทุนคืน x2
+            bonus = betAmount * 1.5; // (จาก * 2) ได้คืน 1.5 เท่า
             message = `ได้ 2 อัน! +${bonus.toLocaleString()} ทอง!`;
+            resultMessage.classList.add('win-message');
         }
         // ไม่ได้รางวัล
         else {
             message = 'ไม่ได้รางวัลเลย ลองใหม่อีกครั้ง!';
+            resultMessage.classList.add('lose-message');
         }
 
-        // จ่ายโบนัส (ถ้ามี)
         if (bonus > 0) {
             userWallet[currentUser] += bonus;
         }
 
-        // อัปเดต UI
         resultMessage.textContent = message;
         updateGoldDisplay();
     }
+    // --- จบส่วนปรับปรุง ---
 
 
-    // --- 4. Event Listeners (เชื่อมปุ่มกับฟังก์ชัน) ---
+    // --- 4. Event Listeners (เหมือนเดิม) ---
     loginButton.addEventListener('click', handleLogin);
     logoutButton.addEventListener('click', handleLogout);
     openButton.addEventListener('click', handleOpenChest);
-
-    // ทำให้กด Enter ที่ช่อง password เพื่อ login ได้
     passwordInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             handleLogin();
