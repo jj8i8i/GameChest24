@@ -1,13 +1,8 @@
+/* นำเข้าฟอนต์ */
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
 
-/* --- *** ปรับปรุงส่วนนี้ *** --- */
-/*
-  เราจะใช้ฟอนต์ Roboto สำหรับข้อความทั่วไป
-  Bungee สำหรับปุ่มและ UI
-  Press Start 2P สำหรับหัวข้อเกมหลัก
-*/
+/* Basic Styles */
 body {
-    /* เปลี่ยนฟอนต์หลักเป็น Roboto (อ่านง่าย) */
     font-family: 'Roboto', sans-serif; 
     background: radial-gradient(circle, #3a3a6e, #1a1a2e);
     color: #e0e0e0;
@@ -16,10 +11,8 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    /* เพิ่ม font-weight ปกติ */
     font-weight: 400; 
 }
-/* --- จบส่วนปรับปรุง --- */
 
 .container {
     background-color: #2a2a4e;
@@ -31,13 +24,10 @@ body {
     text-align: center;
 }
 
-/* --- *** ปรับปรุงส่วนนี้ *** --- */
 /* ใช้ Bungee เฉพาะส่วนที่อยากให้หนาและเป็นเกม */
 h2, .controls label {
     font-family: 'Bungee', cursive;
 }
-/* --- จบส่วนปรับปรุง --- */
-
 
 .hidden {
     display: none;
@@ -54,11 +44,9 @@ input[type="number"] {
     border-radius: 5px;
     background-color: #1a1a2e;
     color: #e0e0e0;
-    /* --- *** ปรับปรุงส่วนนี้ *** --- */
-    /* เปลี่ยนฟอนต์ช่องกรอกเป็น Roboto */
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    font-weight: 700; /* ทำให้ตัวหนังสือในช่องกรอกชัดขึ้นเล็กน้อย */
+    font-weight: 700;
 }
 
 button {
@@ -66,10 +54,8 @@ button {
     padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
-    /* --- *** ปรับปรุงส่วนนี้ *** --- */
-    /* ฟอนต์ปุ่มยังใช้ Bungee */
     font-family: 'Bungee', cursive; 
-    font-weight: bold; /* Bungee มีแต่ bold อยู่แล้ว */
+    font-weight: bold;
     font-size: 1.1rem;
     transition: all 0.2s ease;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -100,8 +86,7 @@ button:disabled {
     background-color: #f94144;
     color: #fff;
     padding: 8px 12px;
-    /* --- *** ปรับปรุงส่วนนี้ *** --- */
-    font-size: 0.9rem; /* ใช้ขนาดของ Bungee */
+    font-size: 0.9rem;
 }
 #logout-button:hover {
     background-color: #e03033;
@@ -113,13 +98,12 @@ button:disabled {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    /* --- *** ปรับปรุงส่วนนี้ *** --- */
-    font-size: 1rem; /* ปรับขนาดฟอนต์ Roboto ให้พอดี */
-    font-weight: 700; /* ทำให้ข้อความต้อนรับหนาเล็กน้อย */
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 #gold-display {
-    font-weight: 700; /* ใช้ 700 (bold) ของ Roboto */
+    font-weight: 700;
     color: #f9c74f;
     background-color: #1a1a2e;
     padding: 5px 10px;
@@ -140,7 +124,7 @@ button:disabled {
     margin: 2rem 0;
 }
 
-/* ช่องแสดงผลลัพธ์ยังต้องตัวหนาและใหญ่ */
+/* ช่องแสดงผลลัพธ์ */
 .chest {
     width: 100px;
     height: 100px;
@@ -150,12 +134,23 @@ button:disabled {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3.5rem;
+    font-size: 3.5rem; /* นี่สำหรับ '❓' */
     font-weight: bold;
     transition: all 0.3s ease;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    overflow: hidden; /* กันรูปล้น */
 }
 
+/* สไตล์รูปภาพที่อยู่ในหีบ */
+.chest img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* หรือ 'contain' ถ้าอยากให้เห็นเต็มรูป */
+}
+
+/* อนิเมชั่น "หมุน" */
 .spinning {
     animation: spin 0.5s linear infinite;
 }
@@ -165,15 +160,32 @@ button:disabled {
     to { transform: rotateY(360deg); }
 }
 
-.item-ruby { color: #f94144; }
-.item-emerald { color: #43aa8b; }
-.item-gold { color: #f9c74f; }
-.item-junk { color: #577590; }
+/* อนิเมชั่นสำหรับช่องที่ชนะ */
+.win-pop {
+    animation: pop-animation 0.5s ease;
+}
 
+@keyframes pop-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); box-shadow: 0 0 25px #f9c74f; }
+    100% { transform: scale(1); }
+}
+
+/* อนิเมชั่นสำหรับตัวเลขเงินตอนชนะ */
+.gold-flash {
+    animation: flash-animation 0.7s ease;
+}
+
+@keyframes flash-animation {
+    0% { color: #f9c74f; transform: scale(1); }
+    50% { color: #ffffff; transform: scale(1.15); }
+    100% { color: #f9c74f; transform: scale(1); }
+}
+
+/* ข้อความผลลัพธ์ */
 #result-message {
-    /* --- *** ปรับปรุงส่วนนี้ *** --- */
-    font-size: 1.1rem; /* ปรับขนาดฟอนต์ Roboto */
-    font-weight: 700; /* ใช้ bold ของ Roboto */
+    font-size: 1.1rem;
+    font-weight: 700;
     height: 2em;
     margin-top: 1rem;
 }
@@ -185,6 +197,7 @@ button:disabled {
     color: #f94144;
 }
 
+/* ปุ่มเปิดหีบ */
 #open-button {
     background-color: #f9c74f;
     color: #1a1a2e;
@@ -196,6 +209,7 @@ button:disabled {
     background-color: #f8b400;
 }
 
+/* อนิเมชั่นปุ่ม "กระพริบ" */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
